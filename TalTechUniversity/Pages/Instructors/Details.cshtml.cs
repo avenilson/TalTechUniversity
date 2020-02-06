@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using TalTechUniversity.Data;
 using TalTechUniversity.Models;
 
-namespace TalTechUniversity.Pages.Students
+namespace TalTechUniversity.Pages.Instructors
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace TalTechUniversity.Pages.Students
             _context = context;
         }
 
-        public Student Student { get; set; }
+        public Instructor Instructor { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,13 +28,9 @@ namespace TalTechUniversity.Pages.Students
                 return NotFound();
             }
 
-            Student = await _context.Students
-                .Include(s => s.Enrollments)
-                .ThenInclude(e => e.Course)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.ID == id);
+            Instructor = await _context.Instructors.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Student == null)
+            if (Instructor == null)
             {
                 return NotFound();
             }

@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TalTechUniversity.Data;
 using TalTechUniversity.Models;
+using TalTechUniversity.Pages.Courses;
 
-namespace TalTechUniversity.Pages.Students
+namespace TalTechUniversity
 {
-    public class CreateModel : PageModel
+    public class CreateModel : DepartmentNamePageModel
     {
         private readonly TalTechUniversity.Data.TalTechUniversityContext _context;
 
@@ -21,28 +22,24 @@ namespace TalTechUniversity.Pages.Students
 
         public IActionResult OnGet()
         {
+            PopulateDepartmentsDropDownList(_context);
             return Page();
         }
 
         [BindProperty]
-        public Student Student { get; set; }
+        public Course Course { get; set; }
 
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+        
         public async Task<IActionResult> OnPostAsync()
         {
-            var emptyStudent = new Student();
-
-            if (await TryUpdateModelAsync<Student>(
-                emptyStudent,
-                "student",   
-                s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate))
+            var emptyCourse = new Course();
+            if (await TryUpdateModelAsync<Course>(emptyCourse,"course", s => s.CourseID, s => s.DepartmentID, s => s.Title, s => s.Credits))
             {
-                _context.Students.Add(emptyStudent);
+                _context.Courses.Add(emptyCourse);
                 await _context.SaveChangesAsync();
-                return RedirectToPage("./Index"); 
+                return RedirectToPage("./Index");
             }
-
+            PopulateDepartmentsDropDownList(_context, emptyCourse.DepartmentID);
             return Page();
         }
     }

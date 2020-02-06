@@ -8,10 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TalTechUniversity.Data;
 using TalTechUniversity.Models;
+using TalTechUniversity.Pages.Courses;
 
-namespace TalTechUniversity.Pages.Students
+namespace TalTechUniversity
 {
-    public class EditModel : PageModel
+    public class EditModel : DepartmentNamePageModel
     {
         private readonly TalTechUniversity.Data.TalTechUniversityContext _context;
 
@@ -21,7 +22,7 @@ namespace TalTechUniversity.Pages.Students
         }
 
         [BindProperty]
-        public Student Student { get; set; }
+        public Course Course { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,41 +31,40 @@ namespace TalTechUniversity.Pages.Students
                 return NotFound();
             }
 
-            Student = await _context.Students.FindAsync(id);
-
-            if (Student == null)
+            Course = await _context.Courses.Include(c => c.Department).FirstOrDefaultAsync(m => m.CourseID == id);
+            if (Course == null)
             {
                 return NotFound();
             }
+            PopulateDepartmentsDropDownList(_context, Course.DepartmentID);
             return Page();
         }
 
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
-            var studentToUpdate = await _context.Students.FindAsync(id);
-
-            if (studentToUpdate == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            if (await TryUpdateModelAsync<Student>(
-                studentToUpdate,
-                "student",
-                s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate))
+            var courseToUpdate = await _context.Courses.FindAsync(id);
+
+            if (courseToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            if (await TryUpdateModelAsync<Course>(
+                courseToUpdate,
+                "course",   
+                c => c.Credits, c => c.DepartmentID, c => c.Title))
             {
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
             }
 
+            PopulateDepartmentsDropDownList(_context, courseToUpdate.DepartmentID);
             return Page();
-        }
-
-        private bool StudentExists(int id)
-        {
-            return _context.Student.Any(e => e.ID == id);
         }
     }
 }
