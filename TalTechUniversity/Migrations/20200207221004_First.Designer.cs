@@ -10,8 +10,8 @@ using TalTechUniversity.Data;
 namespace TalTechUniversity.Migrations
 {
     [DbContext(typeof(TalTechUniversityContext))]
-    [Migration("20200207135938_RowVersion")]
-    partial class RowVersion
+    [Migration("20200207221004_First")]
+    partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
