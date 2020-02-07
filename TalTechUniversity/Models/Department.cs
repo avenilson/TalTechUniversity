@@ -9,7 +9,7 @@ namespace TalTechUniversity.Models
 {
     public class Department
     {
-        public int DepartmentID { get; set; }
+        public int DepartmentID { get; set; } //tracking properties named
 
         [StringLength(50, MinimumLength = 3)]
         public string Name { get; set; }
@@ -24,6 +24,9 @@ namespace TalTechUniversity.Models
         public DateTime StartDate { get; set; }
 
         public int? InstructorID { get; set; }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; } 
 
         public Instructor Administrator { get; set; }
         public ICollection<Course> Courses { get; set; }
