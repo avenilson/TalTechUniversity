@@ -18,17 +18,17 @@ namespace TalTechUniversity.Data
 
             var students = new Student[]
             {
-                new Student { FirstMidName = "Carson",   LastName = "Alexander",
+                new Student { FirstMidName = "Maria",   LastName = "Maasikas",
                     EnrollmentDate = DateTime.Parse("2016-09-01") },
-                new Student { FirstMidName = "Meredith", LastName = "Alonso",
+                new Student { FirstMidName = "Leevi", LastName = "Leevike",
                     EnrollmentDate = DateTime.Parse("2018-09-01") },
-                new Student { FirstMidName = "Arturo",   LastName = "Anand",
+                new Student { FirstMidName = "Artur",   LastName = "Alp",
                     EnrollmentDate = DateTime.Parse("2019-09-01") },
-                new Student { FirstMidName = "Gytis",    LastName = "Barzdukas",
+                new Student { FirstMidName = "Gylli",    LastName = "Pelmi",
                     EnrollmentDate = DateTime.Parse("2018-09-01") },
-                new Student { FirstMidName = "Yan",      LastName = "Li",
+                new Student { FirstMidName = "Ian",      LastName = "Kuusepuu",
                     EnrollmentDate = DateTime.Parse("2018-09-01") },
-                new Student { FirstMidName = "Peggy",    LastName = "Justice",
+                new Student { FirstMidName = "Paul",    LastName = "Vaher",
                     EnrollmentDate = DateTime.Parse("2017-09-01") },
                 new Student { FirstMidName = "Laura",    LastName = "Norman",
                     EnrollmentDate = DateTime.Parse("2019-09-01") },
@@ -44,15 +44,15 @@ namespace TalTechUniversity.Data
 
             var instructors = new Instructor[]
             {
-                new Instructor { FirstMidName = "Kim",     LastName = "Abercrombie",
+                new Instructor { FirstMidName = "Kim",     LastName = "Jones",
                     HireDate = DateTime.Parse("1995-03-11") },
-                new Instructor { FirstMidName = "Fadi",    LastName = "Fakhouri",
+                new Instructor { FirstMidName = "Frederika",    LastName = "Harm",
                     HireDate = DateTime.Parse("2002-07-06") },
-                new Instructor { FirstMidName = "Roger",   LastName = "Harui",
+                new Instructor { FirstMidName = "Robert",   LastName = "Tuulik",
                     HireDate = DateTime.Parse("1998-07-01") },
-                new Instructor { FirstMidName = "Candace", LastName = "Kapoor",
+                new Instructor { FirstMidName = "Inger", LastName = "Kala",
                     HireDate = DateTime.Parse("2001-01-15") },
-                new Instructor { FirstMidName = "Roger",   LastName = "Zheng",
+                new Instructor { FirstMidName = "Roberto",   LastName = "Tikk",
                     HireDate = DateTime.Parse("2004-02-12") }
             };
 
